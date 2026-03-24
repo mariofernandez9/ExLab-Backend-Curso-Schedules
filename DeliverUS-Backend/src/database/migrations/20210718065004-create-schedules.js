@@ -10,12 +10,12 @@ module.exports = {
 
       startTime: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.TIME
       },
 
       endTime: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.TIME
       },
 
       restaurantId: {

@@ -48,6 +48,18 @@ module.exports = {
           key: 'id'
         }
       },
+
+      squeduleId:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'Schedules'
+          },
+          key: 'id'
+        }
+      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
