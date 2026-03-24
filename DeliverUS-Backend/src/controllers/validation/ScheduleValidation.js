@@ -17,11 +17,15 @@ const validateEndTimeAfterStartTime = (endTime, { req }) => {
 }
 
 const create = [
-
+  check('startTime').exits().custom(validateTimeFormat),
+  check('endTime').exits().custom(validateTimeFormat).custom(validateEndTimeAfterStartTime),
+  check('restaurantId').exists().isInt({ min: 1 }).toInt()
 ]
 
 const update = [
-
+  check('startTime').exits().custom(validateTimeFormat),
+  check('endTime').exits().custom(validateTimeFormat).custom(validateEndTimeAfterStartTime),
+  check('restaurantId').exists().isInt({ min: 1 }).toInt()
 ]
 
 export { create, update }
