@@ -29,10 +29,25 @@ const checkScheduleBelongsToRestaurantOnCreate = async (value, { req }) => {
     return Promise.reject(new Error('The shedule does not bellong to the restaurant'))
   }
 
+  return Promise.resolve()
 }
 
 const checkScheduleBelongsToRestaurantOnUpdate = async (value, { req }) => {
+  if (!value) {
+    return Promise.resolve()
+  }
 
+  const shcedule = await Schedule.findByPk(value)
+  if(!shcedule) {
+    return Promise.reject(new Error('The schedule does not exist.'))
+  }
+
+  const product = await Product.findByPk(req.params.productId)
+  if(product.restaurantId !== shcedule.restaurantId){
+    return Promise.reject(new Error('The product does not bellong to the restaurant'))
+  }
+
+  return Promise.resolve()
 }
 
 const create = [
