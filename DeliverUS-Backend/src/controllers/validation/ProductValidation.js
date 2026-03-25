@@ -15,7 +15,19 @@ const checkRestaurantExists = async (value, { req }) => {
   }
 }
 
-const checkScheduleBelongsToRestaurantOnCreate = async (value, { req }) => {
+const checkScheduleBelongsToRestaurantOnCreate = async (value, { req }) => { 
+  if (!value) {
+    return Promise.resolve()
+  }
+
+  const shcedule = Schedule.findByPk(value)
+  if(!shcedule) {
+    return Promise.reject(new Error('The schedule does not exist.'))
+  }
+
+  if(shcedule.restaurantId !== req.body.restaurantId){
+    return Promise.reject(new Error('The shedule does not bellong to the restaurant'))
+  }
 
 }
 
